@@ -1,0 +1,196 @@
+/* ==========================================================================
+   Global resets & base overrides
+   ========================================================================== */
+
+/* Prevent horizontal page overflow */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+}
+
+/* Custom branding logo */
+#IE\.Identite\.collection\._3\.Instances\[0\]\.Instances\[0\] > header > div.ibe_droite > div > a {
+    background-image: url("https://raw.githubusercontent.com/xFufly/fossnote/refs/heads/master/docs/logo500x125transparent.png") !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: right !important;
+}
+
+/* Hide modal popups, block overlays, and footer */
+#id_3_bloquer,
+#IE\.Identite\.collection\._2,
+#IE\.Identite\.collection\._3\.Instances\[6\] {
+    display: none !important;
+}
+
+#div {
+    height: 100% !important;
+}
+
+/* ==========================================================================
+   Mobile layout (< 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* Logo adjustments */
+    #IE\.Identite\.collection\._3\.Instances\[0\]\.Instances\[0\] > header > div.ibe_droite > div > a {
+        background-size: 80% !important;
+        background-position: left !important;
+    }
+
+    /* Hide unused header bars and secondary buttons */
+    #IE\.Identite\.collection\._3\.Instances\[0\]\.Instances\[0\] > header > div.ibe_centre, 
+    #IE\.Identite\.collection\._3\.Instances\[0\]\.Instances\[0\] > header > div.ibe_gauche,
+    #IE\.Identite\.collection\._3\.Instances\[0\] > div > nav.objetBandeauEntete_menu > ul,
+    [id$="_bandzone_1"],
+    [id$="_bandzone_2"] > div > div,
+    [id$="_bandzone_6"],
+    [id$="_bandzone_7"] {
+        display: none !important;
+    }
+
+    /* Wrap search toolbars cleanly */
+    #ligne_bandeau {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        height: auto !important;
+        padding-bottom: 6px !important;
+    }
+
+    #IE\.Identite\.collection\._3\.Instances\[1\]\.Instances\[0\] {
+        display: none !important;
+    }
+
+    [id$="_bandzone_0"],
+    [id$="_bandzone_0"] > div.recherche-conteneur {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #IE\.Identite\.collection\._3\.Instances\[1\]\.Instances\[1\]\.bouton_Edit {
+        width: calc(100vw - 32px) !important;
+        box-sizing: border-box;
+    }
+
+    /* Week selection bar */
+    .calendrier {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow: hidden !important;
+        box-sizing: border-box;
+    }
+
+    .Calendrier_Boutons {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        display: block !important;
+        width: 100% !important;
+        white-space: nowrap !important;
+    }
+
+    .tableJours, .tableMois {
+        min-width: 750px !important;
+    }
+
+    .calendrier-jour {
+        min-width: 24px !important;
+        height: 24px !important;
+        line-height: 24px !important;
+        font-size: 11px !important;
+        text-align: center;
+    }
+
+    /* Custom mobile day navigation bar */
+    .fossnote-day-nav {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        padding: 8px 12px;
+        margin: 6px 0;
+        border-bottom: 2px solid #e9ecef;
+        box-sizing: border-box;
+    }
+
+    .fossnote-day-nav button {
+        background: #4b4b4b;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 14px;
+        font-weight: bold;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.2s ease, opacity 0.2s ease;
+    }
+
+    .fossnote-day-nav button:active {
+        background: #7b1fa2;
+    }
+
+    .fossnote-day-nav button:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
+
+    .fossnote-day-nav span {
+        font-size: 14px;
+        font-weight: bold;
+        color: #212529;
+    }
+
+    /* Lock the main container to exactly the screen width and prevent horizontal scroll bleeding */
+    .principal,
+    .ObjetInterfaceEspaceEdT,
+    .interface_affV_client {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
+    /* We removed the .grille override because display: block breaks Pronote's vertical flex layout.
+       Pronote needs its native flex properties to calculate the correct grid height.
+       Horizontal stretching is safely clipped by .principal's overflow-x: hidden. */
+
+    /* Let Pronote calculate the internal widths natively */
+    [id$="_Zone_TitreHaut"],
+    [id$="_Zone_Grille"] {
+        overflow: hidden !important;
+        touch-action: pan-y !important; /* Prevent native horizontal pan */
+    }
+
+    /* Fix internal widths of courses so text uses the full uncompressed width */
+    .EmploiDuTemps_Element .contenu,
+    .EmploiDuTemps_Element .contenuMemo {
+        width: auto !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Force scroll reset if Pronote tries to scroll natively */
+    [id$="_Zone_TitreHaut"]::-webkit-scrollbar,
+    [id$="_Zone_Grille"]::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* Smooth slide animation */
+    [id$="_Contenu_TitreHaut"],
+    [id$="_Contenu_Grille"] {
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        will-change: transform;
+    }
+
+    /* Keep the vertical hour ruler visible on the left */
+    #id_53_titreGH,
+    [id$="_Zone_TitreLignes"] {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
+
+    #listitem {
+        min-width: 40px !important;
+        max-width: 40px !important;
+    }
+}
